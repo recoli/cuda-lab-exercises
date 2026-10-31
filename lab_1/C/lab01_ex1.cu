@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 
 /**
@@ -6,7 +5,8 @@
  */
 void cpu_helloworld()
 {
-    printf("Hello from the CPU!\n");
+    printf("Hello from the CPU!
+");
 }
 
 /**
@@ -15,7 +15,8 @@ void cpu_helloworld()
 __global__ void gpu_helloworld()
 {
     int threadId = threadIdx.x;
-    printf("Hello from the GPU! My threadId is %d\n", threadId);
+    printf("Hello from the GPU! My threadId is %d
+", threadId);
 }
 
 int main(int argc, char **argv)
@@ -29,6 +30,9 @@ int main(int argc, char **argv)
     // Call the GPU version
     gpu_helloworld<<<grid, block>>>();
     
+    // Wait for GPU to finish before exiting to ensure printf flushes
+    cudaDeviceSynchronize();
+    
     ////////////////
     // TO-DO #1.2 ////////////////////
     // Introduce your changes here! //
@@ -36,4 +40,3 @@ int main(int argc, char **argv)
     
     return 0;
 }
-
